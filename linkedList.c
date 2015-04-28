@@ -28,11 +28,12 @@ int main(int argc, char *argv[])
 		printf("Success! %c\n", test->next->next->data);
 	}
 	
-	/*res = removeNode(test, 'c');
+	res = removeNode(test, 'd');
 	if(test != NULL)
 	{
-		printf("Success! %c\n", test->next->data);
-	}*/
+		printf("Success! %c\n", test->data);
+	}
+	removeNode(test, 'd');
 	
 	test = destroyList(test);
 }
@@ -169,7 +170,7 @@ int removeNode(listNode * list, char data)
 		temp = list;
 		if(list->next != NULL)
 		{
-			*list = *list->next;
+			nav = list->next;
 		}
 		else
 		{
@@ -177,6 +178,10 @@ int removeNode(listNode * list, char data)
 		}
 		
 		destroyList(temp);
+		if(nav != NULL)
+		{
+			*list = *nav;
+		}
 		return 1;
 	}
 	
@@ -185,7 +190,7 @@ int removeNode(listNode * list, char data)
 	{
 		if(list->data == data)
 		{
-			temp = list;
+			*temp = *list;
 			if(list->next != NULL)
 			{
 				*list = *list->next;
