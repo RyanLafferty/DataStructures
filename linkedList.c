@@ -30,12 +30,12 @@ int main(int argc, char *argv[])
 		printf("Success! %c\n", test->next->next->data);
 	}
 	
-	res = removeNode(test, 'd');
+	test = removeNode(test, 'c');
 	if(test != NULL)
 	{
 		printf("Success! %c\n", test->data);
 	}
-	removeNode(test, 'd');
+	test = removeNode(test, 'd');
 	
 	test = destroyList(test);
 }
@@ -149,9 +149,9 @@ int addNode(listNode * list, char data)
 /*
 Desc: Removes a node from the list.
 Args: A pointer to the list and data (char).
-Return: Returns 0 on failure and 1 on success.
+Return: Returns a pointer to the list
 */
-int removeNode(listNode * list, char data)
+listNode * removeNode(listNode * list, char data)
 {
 	listNode * nav;
 	listNode * temp;
@@ -164,27 +164,23 @@ int removeNode(listNode * list, char data)
 	if(list == NULL)
 	{
 		printf("Error: Cannot remove a node from an empty list.\n");
-		return 0;
+		return NULL;
 	}
 	
 	if(list->data == data)
 	{
-		temp = list;
-		if(list->next != NULL)
+		temp = list->next;	
+		destroyNode(list);
+		list = temp;
+		if(list != NULL)
 		{
-			nav = list->next;
+			return list;
 		}
 		else
 		{
-			printf("Warning: Empty list.\n");
+			printf("Warning: list is now empty.\n");
+			return NULL;
 		}
-		
-		destroyList(temp);
-		if(nav != NULL)
-		{
-			*list = *nav;
-		}
-		return 1;
 	}
 	
 	nav = list;
@@ -199,8 +195,8 @@ int removeNode(listNode * list, char data)
 				*prev->next = *list;
 			}
 			
-			destroyList(temp);
-			return 1;
+			destroyNode(temp);
+			return list;
 		}
 		
 		prev = nav;
@@ -209,13 +205,13 @@ int removeNode(listNode * list, char data)
 	
 	if(list->data == data)
 	{
-		destroyList(list);
+		destroyNode(list);
 		prev->next = NULL;
 		printf("Warning: Node has been removed from the end and memory link still exists.\n Please set the end of the list to NULL.\n");
-		return 1;
+		return NULL;
 	}
 	
-	return 0;
+	return list;
 }
 
 /*
