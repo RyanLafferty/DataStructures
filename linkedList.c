@@ -2,6 +2,8 @@
 Ryan Lafferty
 */
 
+//todo: fix remove head to not mess with the head of the use pointer to pointer
+
 #include "linkedList.h"
 
 int main(int argc, char *argv[]) 
