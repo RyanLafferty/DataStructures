@@ -6,7 +6,35 @@ Ryan Lafferty
 
 int main(int argc, char *argv[]) 
 {
+	listNode * test;
+	int res;
 	
+	test = createList();
+	if(test == NULL)
+	{
+		printf("Fail.\n");
+	}
+	test->data = 'c';
+	
+	res = addNode(test, 'd');
+	if(test->next != NULL)
+	{
+		printf("Success! %c\n", test->next->data);
+	}
+	
+	res = addNode(test, 'd');
+	if(test->next != NULL)
+	{
+		printf("Success! %c\n", test->next->next->data);
+	}
+	
+	/*res = removeNode(test, 'c');
+	if(test != NULL)
+	{
+		printf("Success! %c\n", test->next->data);
+	}*/
+	
+	test = destroyList(test);
 }
 
 /*
@@ -28,7 +56,7 @@ listNode * createList()
 	}
 	
 	list->next = NULL;
-	list->data = NULL;
+	list->data = 0;
 	
 	return list;
 }
@@ -41,8 +69,10 @@ Return: Returns NULL.
 listNode * destroyList(listNode * list)
 {
 	listNode * temp;
+	int res;
 	
 	temp = NULL;
+	res = 1;
 	
 	if(list == NULL)
 	{
@@ -50,42 +80,64 @@ listNode * destroyList(listNode * list)
 		return NULL;
 	}
 	
-	while(list->next != NULL)
+	while(list->next != NULL && res == 1)
 	{
 		temp = list;
 		list = list->next;
 		
-		destroyNode(temp);
+		res = destroyNode(temp);
+		if(res != 1)
+		{
+			return NULL;
+		}
 	}
-	destroyNode(list);
+	if(list != NULL && res == 1)
+	{
+		destroyNode(list);
+	}
 	
-	list = NULL;
-	return list;
+	return NULL;
 }
 
 /*
 Desc: Adds a node to the list.
-Args: A pointer to the list (listNode) and a pointer to the node to be added (listNode).
+Args: A pointer to the list (listNode) and the data (char).
 Return: Returns 0 on failure and 1 on success.
 */
-int addNode(listNode * list, listNode * node)
+int addNode(listNode * list, char data)
 {
 	listNode * nav;
+	listNode * node;
 	
 	nav = NULL;
+	node = NULL;
 	
 	if(list == NULL)
 	{
 		printf("Error: Cannot add a node to an empty list.\n");
 		return 0;
 	}
+	if(data == 0)
+	{
+		printf("Error: Cannot add node with empty data.\n");
+		return 0;
+	}
+	
+	node = malloc(sizeof(listNode) * 1);
+	if(node == NULL)
+	{
+		printf("Error: Out of memory, could not create node.\n");
+		return 0;
+	}
+	
+	node->data = data;
 	
 	nav = list;
 	while(nav->next != NULL)
 	{
 		nav = nav->next;
 	}
-	*nav->next = *node;
+	nav->next = node;
 	node->next = NULL;
 	
 	return 1;
@@ -93,10 +145,10 @@ int addNode(listNode * list, listNode * node)
 
 /*
 Desc: Removes a node from the list.
-Args: A pointer to the list and a pointer to the node (listNode).
+Args: A pointer to the list and data (char).
 Return: Returns 0 on failure and 1 on success.
 */
-int removeNode(listNode * list, listNode * node)
+int removeNode(listNode * list, char data)
 {
 	listNode * nav;
 	listNode * temp;
@@ -112,7 +164,7 @@ int removeNode(listNode * list, listNode * node)
 		return 0;
 	}
 	
-	if(list->data == node->data)
+	if(list->data == data)
 	{
 		temp = list;
 		if(list->next != NULL)
@@ -131,7 +183,7 @@ int removeNode(listNode * list, listNode * node)
 	nav = list;
 	while(nav->next != NULL)
 	{
-		if(list->data == node->data)
+		if(list->data == data)
 		{
 			temp = list;
 			if(list->next != NULL)
@@ -148,9 +200,10 @@ int removeNode(listNode * list, listNode * node)
 		nav = nav->next;
 	}
 	
-	if(list->data == node->data)
+	if(list->data == data)
 	{
 		destroyList(list);
+		prev->next = NULL;
 		printf("Warning: Node has been removed from the end and memory link still exists.\n Please set the end of the list to NULL.\n");
 		return 1;
 	}
@@ -165,16 +218,13 @@ Return: Returns 1 on success and 0 on failure.
 */
 int destroyNode(listNode * node)
 {
-	if(node == NULL)
+	if(node == NULL || node->data == 0)
 	{
 		printf("Error: Cannot destroy an empty node.\n");
 		return 0;
 	}
 	
-	if(node->data != NULL)
-	{
-		free(node->data);
-	}
+	node->data = 0;
 	free(node);
 	
 	return 1;
@@ -185,7 +235,7 @@ Desc: Determines if a node exists in the list.
 Args: A pointer to the list (listNode) and a pointer to the data (void).
 Return: Returns 0 on failure and 1 on success.
 */
-int findNode(listNode * list, void * data)
+int findNode(listNode * list, char data)
 {
 	listNode * nav;
 	
@@ -219,7 +269,7 @@ Desc: Gets a node from the list.
 Args: A pointer to the list (listNode) and a pointer to the data (void).
 Return: Returns a pointer to the node on success and NULL on failure.
 */
-listNode * getNode(listNode * list, void * data)
+listNode * getNode(listNode * list, char data)
 {
 	listNode * nav;
 	
