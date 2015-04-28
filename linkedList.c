@@ -19,23 +19,28 @@ int main(int argc, char *argv[])
 	res = addNode(test, 'd');
 	if(test->next != NULL)
 	{
-		printf("Success! %c\n", test->next->data);
+		printf("Success! %c added\n", test->next->data);
 	}
 	
-	res = addNode(test, 'd');
+	res = addNode(test, 'e');
 	if(test->next != NULL)
 	{
-		printf("Success! %c\n", test->next->next->data);
+		printf("Success! %c added\n", test->next->next->data);
 	}
 	
+	printf("old head = %c\n", test->data);
 	test = removeNode(test, 'c');
 	if(test != NULL)
 	{
-		printf("Success! %c\n", test->data);
+		printf("Success! new head = %c\n", test->data);
 	}
 	test = removeNode(test, 'd');
 	
 	test = destroyList(test);
+	if(test == NULL)
+	{
+		printf("Success! List destroyed!\n");
+	}
 }
 
 /*
@@ -86,6 +91,7 @@ listNode * destroyList(listNode * list)
 		temp = list;
 		list = list->next;
 		
+		/*printf("freeing %c\n", temp->data);*/
 		res = destroyNode(temp);
 		if(res != 1)
 		{
@@ -94,6 +100,7 @@ listNode * destroyList(listNode * list)
 	}
 	if(list != NULL && res == 1)
 	{
+		/*printf("freeing %c\n", list->data);*/
 		destroyNode(list);
 	}
 	
