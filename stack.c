@@ -65,6 +65,11 @@ int main(int argc, char *argv[])
 	return 0;
 }
 
+/*
+Desc: Creates a static stack of a specified size.
+Args: The size of the stack to be created (int).
+Return: Returns a pointer to the newly created stack (stackNode).
+*/
 stackNode * createStaticStack(int size)
 {
 	stackNode * stack;
@@ -89,6 +94,11 @@ stackNode * createStaticStack(int size)
 	return stack;
 }
 
+/*
+Desc: Destroys a static stack.
+Args: A pointer to the static stack (stackNode) and the size of the stack (int).
+Return: A pointer to the destroyed stack (stackNode.
+*/
 stackNode * destroyStaticStack(stackNode * stack, int size)
 {
 	int i;
@@ -112,6 +122,11 @@ stackNode * destroyStaticStack(stackNode * stack, int size)
 	return NULL;
 }
 
+/*
+Desc: Creates a dynamic stack.
+Args: None.
+Return: Returns a pointer to the newly created stack/stack node (stackNode).
+*/
 stackNode * createDynamicStack()
 {
 	stackNode * stack;
@@ -131,6 +146,11 @@ stackNode * createDynamicStack()
 	return stack;
 }
 
+/*
+Desc: Destroys a dynamic stack.
+Args: A pointer to the stack (stackNode).
+Return: NULL.
+*/
 stackNode * destroyDynamicStack(stackNode * stack)
 {
 	stackNode * temp;
@@ -156,6 +176,11 @@ stackNode * destroyDynamicStack(stackNode * stack)
 	return NULL;
 }
 
+/*
+Desc: Pushes a given node onto the supplied stack.
+Args: A pointer to the stack and a pointer to the node to be pushed (stackNode).
+Return: Returns a pointer to the new head of the stack (stackNode).
+*/
 stackNode * dynamicPushNode(stackNode * stack, stackNode * node)
 {
 	if(node == NULL)
@@ -174,7 +199,12 @@ stackNode * dynamicPushNode(stackNode * stack, stackNode * node)
 	return node;
 }
 
-stackNode * dynamicPushData(stackNode * stack,  char data)
+/*
+Desc: Pushes suppplied data onto a given stack.
+Args: A pointer to the stack (stackNode) and some data (char).
+Return: A pointer to the new head of the stack (stackNode).
+*/
+stackNode * dynamicPushData(stackNode * stack, char data)
 {
 	stackNode * node;
 	
@@ -200,6 +230,11 @@ stackNode * dynamicPushData(stackNode * stack,  char data)
 	return node;
 }
 
+/*
+Desc: Pops a node from a given stack.
+Args: A pointer to the stack (stackNode).
+Return: A pointer to the new head of the stack (stackNode).
+*/
 stackNode * dynamicPopNode(stackNode * stack)
 {
 	stackNode * temp;
@@ -225,28 +260,28 @@ stackNode * dynamicPopNode(stackNode * stack)
 	return stack;
 }
 
-int dynamicFindNode(stackNode * stack, stackNode * node)
+/*
+Desc: Finds a node in a supplied stack.
+Args: A pointer to the stack (stackNode) and some data (char).
+Return: Returns 0 on failure and 1 on success (int).
+*/
+int dynamicFindNode(stackNode * stack, char data)
 {
 	if(stack == NULL)
 	{
 		printf("Error: Cannot find an item in an empty stack.\n");
 		return 0;
 	}
-	if(node == NULL)
-	{
-		printf("Error: Cannot find an empty item in a stack.\n");
-		return 0;
-	}
 	
 	while(stack->next != NULL)
 	{
-		if(stack->data == node->data)
+		if(stack->data == data)
 		{
 			return 1;
 		}
 		stack = stack->next;
 	}
-	if(stack->data == node->data)
+	if(stack->data == data)
 	{
 		return 1;
 	}
@@ -254,28 +289,28 @@ int dynamicFindNode(stackNode * stack, stackNode * node)
 	return 0;
 }
 
-stackNode * dynamicGetNode(stackNode * stack, stackNode * node)
+/*
+Desc: Finds and returns a node from a given stack.
+Args: A pointer to the stack (stackNode) and some data (char).
+Return: A pointer to the matching node (stackNode).
+*/
+stackNode * dynamicGetNode(stackNode * stack, char data)
 {
 	if(stack == NULL)
 	{
 		printf("Error: Cannot find an item in an empty stack.\n");
 		return NULL;
 	}
-	if(node == NULL)
-	{
-		printf("Error: Cannot find an empty item in a stack.\n");
-		return NULL;
-	}
 	
 	while(stack->next != NULL)
 	{
-		if(stack->data == node->data)
+		if(stack->data == data)
 		{
 			return stack;
 		}
 		stack = stack->next;
 	}
-	if(stack->data == node->data)
+	if(stack->data == data)
 	{
 		return stack;
 	}
@@ -283,6 +318,11 @@ stackNode * dynamicGetNode(stackNode * stack, stackNode * node)
 	return NULL;
 }
 
+/*
+Desc: Peeks at the top of the stack.
+Args: A pointer to the stack (stackNode).
+Return: A pointer to the top node (stackNode).
+*/
 stackNode * dynamicPeekNode(stackNode * stack)
 {
 	if(stack == NULL)

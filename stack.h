@@ -22,8 +22,8 @@ stackNode * destroyDynamicStack(stackNode * stack);
 stackNode * dynamicPushNode(stackNode * stack, stackNode * node);
 stackNode * dynamicPushData(stackNode * stack,  char data);
 stackNode * dynamicPopNode(stackNode * stack);
-int dynamicFindNode(stackNode * stack, stackNode * node);
-stackNode * dynamicGetNode(stackNode * stack, stackNode * node);
+int dynamicFindNode(stackNode * stack, char data);
+stackNode * dynamicGetNode(stackNode * stack, char data);
 stackNode * dynamicPeekNode(stackNode * stack);
 
 
