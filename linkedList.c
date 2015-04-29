@@ -34,7 +34,16 @@ int main(int argc, char *argv[])
 	{
 		printf("Success! new head = %c\n", test->data);
 	}
-	test = removeNode(test, 'd');
+	
+	test = removeNode(test, 'e');
+	if(test->next == NULL)
+	{
+		printf("Success! Tail was destroyed.\n");
+	}
+	else
+	{
+		printf("%c\n", test->next->data);
+	}
 	
 	test = destroyList(test);
 	if(test == NULL)
@@ -191,7 +200,7 @@ listNode * removeNode(listNode * list, char data)
 	nav = list;
 	while(nav->next != NULL)
 	{
-		if(list->data == data)
+		if(nav->data == data)
 		{
 			*temp = *list;
 			if(list->next != NULL)
@@ -208,12 +217,12 @@ listNode * removeNode(listNode * list, char data)
 		nav = nav->next;
 	}
 	
-	if(list->data == data)
+	if(nav->data == data)
 	{
-		destroyNode(list);
+		destroyNode(nav);
 		prev->next = NULL;
-		printf("Warning: Node has been removed from the end and memory link still exists.\n Please set the end of the list to NULL.\n");
-		return NULL;
+		printf("Warning: Node has been removed from the end and memory link still exists.\nPlease make sure the end of the list to NULL.\n");
+		return list;
 	}
 	
 	return list;
