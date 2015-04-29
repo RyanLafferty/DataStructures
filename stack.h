@@ -19,6 +19,13 @@ stackNode * destroyStaticStack(stackNode * stack, int size);
 
 stackNode * createDynamicStack();
 stackNode * destroyDynamicStack(stackNode * stack);
+stackNode * dynamicPushNode(stackNode * stack, stackNode * node);
+stackNode * dynamicPushData(stackNode * stack,  char data);
+stackNode * dynamicPopNode(stackNode * stack);
+int dynamicFindNode(stackNode * stack, stackNode * node);
+stackNode * dynamicGetNode(stackNode * stack, stackNode * node);
+stackNode * dynamicPeekNode(stackNode * stack);
+
 
 /*
 listNode * createList();
