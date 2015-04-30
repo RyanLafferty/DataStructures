@@ -8,14 +8,46 @@ int main(int argc, char *argv[])
 {
 	stackNode * test;
 	stackNode * temp;
+	int suc;
 		
 	test = NULL;
 	temp = NULL;
+	suc = 0;
 		
 	test = createStaticStack(10);
 	if(test+9 != NULL)
 	{
 		printf("Success! Static Stack was created.\n");
+	}
+	
+	suc = staticPushNode(test, 10, 'a');
+	if(test[0].data == 'a' && suc == 1)
+	{
+		printf("Success! a has been pushed on the stack.\n");
+	}
+	
+	suc = staticPushNode(test, 10, 'b');
+	if(test[0].data == 'b' && suc == 1)
+	{
+		printf("Success! b has been pushed on the stack.\n");
+	}
+	
+	suc = staticPushNode(test, 10, 'c');
+	if(test[0].data == 'c' && suc == 1)
+	{
+		printf("Success! c has been pushed on the stack.\n");
+	}
+		
+	suc = staticFindNode(test, 10, 'b');
+	if(suc == 1)
+	{
+		printf("Success! b was found in the stack.\n");
+	}
+	
+	temp = staticGetNode(test, 10, 'b');
+	if(temp != NULL && temp->data == 'b')
+	{
+		printf("Success! a pointer to b was received.\n");
 	}
 	
 	test = destroyStaticStack(test, 10);
@@ -113,9 +145,9 @@ int staticPushNode(stackNode * stack, int size, char data)
 	
 	for(i = (size - 1); i > 0; i--)
 	{
-		stack[i].data = stack[i-1].data;
+		//fix
 	}
-	stack[0].data = data;
+	//fix
 	
 	return 1;
 }
@@ -144,7 +176,7 @@ int staticPopNode(stackNode * stack, int size)
 	
 	for(i = 0; i < (size - 1); i++)
 	{
-		stack[i].data = stack[i+1].data;
+		//fix
 	}
 	
 	return 1;
