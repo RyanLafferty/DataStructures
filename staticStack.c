@@ -78,12 +78,13 @@ stackNode * createStaticStack(int size)
 		return NULL;
 	}
 	
-	stackNode mem[size];
+	//stackNode mem[size];
+	stack = malloc(sizeof(stackNode) * size);
 	for(i = 0; i < size; i++)
 	{
-		mem[i].data = 0;
+		stack[i].data = 0;
 	}
-	stack = mem;	
+	//stack = mem;	
 	
 	return stack;
 }
@@ -112,6 +113,7 @@ stackNode * destroyStaticStack(stackNode * stack, int size)
 			stack[i].data = 0;
 		}
 	}
+	free(stack);
 	
 	return NULL;
 }
@@ -145,9 +147,9 @@ int staticPushNode(stackNode * stack, int size, char data)
 	
 	for(i = (size - 1); i > 0; i--)
 	{
-		//fix
+		stack[i].data = stack[i-1].data;
 	}
-	//fix
+	stack[0].data = data;
 	
 	return 1;
 }
@@ -176,7 +178,7 @@ int staticPopNode(stackNode * stack, int size)
 	
 	for(i = 0; i < (size - 1); i++)
 	{
-		//fix
+		stack[i] = stack[i+1];
 	}
 	
 	return 1;
