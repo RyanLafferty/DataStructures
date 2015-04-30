@@ -12,18 +12,6 @@ int main(int argc, char *argv[])
 	test = NULL;
 	temp = NULL;
 	
-	test = createStaticStack(10);
-	if(test+9 != NULL)
-	{
-		printf("Success! Static Stack was created.\n");
-	}
-	
-	test = destroyStaticStack(test, 10);
-	if(test == NULL)
-	{
-		printf("Success! Static Stack destroyed.\n");
-	}
-	
 	test = createDynamicStack();
 	if(test != NULL)
 	{
@@ -63,63 +51,6 @@ int main(int argc, char *argv[])
 	}
 	
 	return 0;
-}
-
-/*
-Desc: Creates a static stack of a specified size.
-Args: The size of the stack to be created (int).
-Return: Returns a pointer to the newly created stack (stackNode).
-*/
-stackNode * createStaticStack(int size)
-{
-	stackNode * stack;
-	int i;
-	
-	stack = NULL;
-	i = 0;
-	
-	if(size <= 0)
-	{
-		printf("Error: Size given is too small, must be greater than 0.\n");
-		return NULL;
-	}
-	
-	stackNode mem[size];
-	for(i = 0; i < size; i++)
-	{
-		mem[i].data = 0;
-	}
-	stack = mem;	
-	
-	return stack;
-}
-
-/*
-Desc: Destroys a static stack.
-Args: A pointer to the static stack (stackNode) and the size of the stack (int).
-Return: A pointer to the destroyed stack (stackNode.
-*/
-stackNode * destroyStaticStack(stackNode * stack, int size)
-{
-	int i;
-	
-	i = 0;
-	
-	if(stack == NULL)
-	{
-		printf("Error: Cannot destroy an empty stack.\n");
-		return NULL;
-	}
-	
-	for(i = 0; i < size; i++)
-	{
-		if(stack[i].data != 0)
-		{
-			stack[i].data = 0;
-		}
-	}
-	
-	return NULL;
 }
 
 /*

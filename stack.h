@@ -16,6 +16,11 @@ typedef struct stackNode
 
 stackNode * createStaticStack(int size);
 stackNode * destroyStaticStack(stackNode * stack, int size);
+int staticPushNode(stackNode * stack, int size, char data);
+int staticPopNode(stackNode * stack, int size);
+int staticFindNode(stackNode * stack, int size, char data);
+stackNode * staticGetNode(stackNode * stack, int size, char data);
+stackNode * staticPeekNode(stackNode * stack);
 
 stackNode * createDynamicStack();
 stackNode * destroyDynamicStack(stackNode * stack);
