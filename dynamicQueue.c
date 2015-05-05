@@ -8,9 +8,9 @@ int main(int argc, char *argv[])
 }
 
 /*
-Desc: 
-Args: 
-Return: 
+Desc: Creates a dynamic queue.
+Args: None.
+Return: Returns NULL on failure and a pointer to the queue on success (queueNode).
 */
 queueNode * createDynamicQueue()
 {
@@ -32,9 +32,9 @@ queueNode * createDynamicQueue()
 }
 
 /*
-Desc: 
-Args: 
-Return: 
+Desc: Destroys a dynamic queue.
+Args: A pointer to the queue (queueNode).
+Return: Returns NULL.
 */
 queueNode * destroyDynamicQueue(queueNode * queue)
 {
@@ -63,9 +63,9 @@ queueNode * destroyDynamicQueue(queueNode * queue)
 }
 
 /*
-Desc: 
-Args: 
-Return: 
+Desc: Enqueues a node into the queue.
+Args: Takes a pointer to the queue and a pointer to a node to be inserted (queueNode).
+Return: Returns 0 on failure and 1 on success (int).
 */
 int dynamicEnqueue(queueNode * queue, queueNode * node)
 {
@@ -96,9 +96,9 @@ int dynamicEnqueue(queueNode * queue, queueNode * node)
 }
 
 /*
-Desc: 
-Args: 
-Return: 
+Desc: Enqueues data into the queue.
+Args: A pointer to the queue (queueNode) and some data (char).
+Return: Returns 0 on failure and 1 on success (int).
 */
 int dynamicEnqueueData(queueNode * queue, char data)
 {
@@ -141,9 +141,9 @@ int dynamicEnqueueData(queueNode * queue, char data)
 }
 
 /*
-Desc: 
-Args: 
-Return: 
+Desc: Removes a node from the queue.
+Args: A pointer to the queue (queueNode).
+Return: Returns a pointer to the queue on queue on success and NULL on failure or empty queue status (queueNode).
 */
 queueNode * dynamicDequeue(queueNode * queue)
 {
