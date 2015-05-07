@@ -6,7 +6,54 @@ Ryan Lafferty
 
 int main(int argc, char *argv[]) 
 {
+	queueNode * temp;
+	queueNode * test;
+	int ret;
 	
+	temp = NULL;
+	test = NULL;
+	ret = 0;
+	
+	test = createDynamicQueue();
+	if(test != NULL)
+	{
+		printf("Creation Passed!\n");
+	}
+	
+	test->data = 'a';
+	
+	ret = dynamicEnqueueData(test, 'b');
+	if(ret == 1 && test->next->data == 'b')
+	{
+		printf("Enqueue Data Passed!\n");
+	}
+	
+	temp = createDynamicQueue();
+	if(temp != NULL)
+	{
+		temp->data = 'c';
+		
+		ret = dynamicEnqueue(test, temp);
+		if(ret == 1 && test->next->next->data == 'c')
+		{
+			printf("Enqueue node Passed!\n");
+		}
+	}
+	
+	ret = dynamicEnqueueData(test, 'd');
+	ret = dynamicEnqueueData(test, 'e');
+	
+	test = dynamicDequeue(test);
+	if(test->data == 'b')
+	{
+		printf("Dequeue Passed!\n");
+	}
+	
+	test = destroyDynamicQueue(test);
+	if(test == NULL)
+	{
+		printf("Destruction Passed!\n");
+	}
 	
 	return 0;
 }
