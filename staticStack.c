@@ -78,13 +78,11 @@ stackNode * createStaticStack(int size)
 		return NULL;
 	}
 	
-	//stackNode mem[size];
 	stack = malloc(sizeof(stackNode) * size);
 	for(i = 0; i < size; i++)
 	{
 		stack[i].data = 0;
 	}
-	//stack = mem;	
 	
 	return stack;
 }
@@ -180,6 +178,7 @@ int staticPopNode(stackNode * stack, int size)
 	{
 		stack[i] = stack[i+1];
 	}
+	stack[size-1].data = 0;
 	
 	return 1;
 }
