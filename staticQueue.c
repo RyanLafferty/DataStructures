@@ -7,6 +7,7 @@ Ryan Lafferty
 int main(int argc, char *argv[]) 
 {
 	
+	return 0;
 }
 
 queueNode * createStaticStack(int size);
